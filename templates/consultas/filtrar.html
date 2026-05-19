@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}FILTRAR CONSULTAS{% endblock %}
+
+{% block content %}
+
+<h1>Filtro de Consultas por Fecha</h1>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <form method="POST">
+      <div class="row">
+        <div class="col-md-5">
+          <label class="form-label">Fecha Inicio</label>
+          <input type="date" name="fecha_inicio" class="form-control" required>
+        </div>
+        <div class="col-md-5">
+          <label class="form-label">Fecha Fin</label>
+          <input type="date" name="fecha_fin" class="form-control" required>
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">&nbsp;</label>
+          <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% if consultas %}
+<h3>Resultados del {{ fecha_inicio.strftime('%d/%m/%Y') }} al {{ fecha_fin.strftime('%d/%m/%Y') }}</h3>
+<table class="table table-striped">
+  <tr>
+    <th>ID</th>
+    <th>Fecha</th>
+    <th>Medico</th>
+    <th>Paciente</th>
+    <th>Diagnostico</th>
+  </tr>
+  {% for item in consultas %}
+  <tr>
+    <td>{{item.id}}</td>
+    <td>{{item.fecha.strftime('%d/%m/%Y')}}</td>
+    <td>{{item.medico.nombre}}</td>
+    <td>{{item.paciente.nombre}}</td>
+    <td>{{item.diagnostico}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<a href="{{ url_for('consulta.index') }}" class="btn btn-secondary">Volver</a>
+
+{% endblock %}

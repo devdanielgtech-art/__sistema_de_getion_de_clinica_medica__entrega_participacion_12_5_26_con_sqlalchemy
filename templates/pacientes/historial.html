@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}HISTORIAL MEDICO{% endblock %}
+
+{% block content %}
+
+<h1>Historial Medico de {{ paciente.nombre }}</h1>
+
+<a href="{{ url_for('paciente.index') }}" class="btn btn-secondary mb-3">Volver</a>
+
+<table class="table table-striped">
+  <tr>
+    <th>ID</th>
+    <th>Fecha</th>
+    <th>Medico</th>
+    <th>Diagnostico</th>
+    <th>Tratamiento</th>
+  </tr>
+  {% for consulta in consultas %}
+  <tr>
+    <td>{{consulta.id}}</td>
+    <td>{{consulta.fecha.strftime('%d/%m/%Y')}}</td>
+    <td>{{consulta.medico.nombre}}</td>
+    <td>{{consulta.diagnostico}}</td>
+    <td>{{consulta.tratamiento}}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

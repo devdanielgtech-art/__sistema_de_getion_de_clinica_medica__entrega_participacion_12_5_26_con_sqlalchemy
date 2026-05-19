@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}CITAS | EDIT{% endblock %}
+
+{% block content %}
+
+<h1>Actualizacion de Cita</h1>
+
+<form action="{{ url_for('cita.edit', id=cita.id) }}" method="POST">
+  <div class="mb-3">
+    <label class="form-label">Medico</label>
+    <select name="medico_id" class="form-control" required>
+      <option value="">Seleccione un Medico</option>
+      {% for medico in medicos %}
+        <option value="{{medico.id}}" {% if medico.id == cita.medico_id %}selected{% endif %}>{{medico.nombre}} - {{medico.especialidad}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Paciente</label>
+    <select name="paciente_id" class="form-control" required>
+      <option value="">Seleccione un Paciente</option>
+      {% for paciente in pacientes %}
+        <option value="{{paciente.id}}" {% if paciente.id == cita.paciente_id %}selected{% endif %}>{{paciente.nombre}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Fecha y Hora</label>
+    <input type="datetime-local" class="form-control" name="fecha_hora" value="{{ cita.fecha_hora.strftime('%Y-%m-%dT%H:%M') }}" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Motivo</label>
+    <textarea class="form-control" name="motivo" rows="3" required>{{ cita.motivo }}</textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Estado</label>
+    <select name="estado" class="form-control" required>
+      <option value="pendiente" {% if cita.estado == 'pendiente' %}selected{% endif %}>Pendiente</option>
+      <option value="confirmada" {% if cita.estado == 'confirmada' %}selected{% endif %}>Confirmada</option>
+      <option value="cancelada" {% if cita.estado == 'cancelada' %}selected{% endif %}>Cancelada</option>
+      <option value="completada" {% if cita.estado == 'completada' %}selected{% endif %}>Completada</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Actualizar Cita</button>
+</form>
+
+{% endblock %}

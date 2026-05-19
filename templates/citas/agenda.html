@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}AGENDA DE CITAS{% endblock %}
+
+{% block content %}
+
+<h1>Agenda de Citas</h1>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <form method="GET" class="row">
+      <div class="col-md-5">
+        <label class="form-label">Medico</label>
+        <select name="medico_id" class="form-control">
+          <option value="">Todos los Medicos</option>
+          {% for medico in medicos %}
+            <option value="{{medico.id}}" {% if medico_id == medico.id %}selected{% endif %}>{{medico.nombre}} - {{medico.especialidad}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-5">
+        <label class="form-label">Fecha</label>
+        <input type="date" name="fecha" class="form-control" value="{{ fecha.strftime('%Y-%m-%d') if fecha else '' }}">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">&nbsp;</label>
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <tr>
+    <th>ID</th>
+    <th>Fecha y Hora</th>
+    <th>Medico</th>
+    <th>Paciente</th>
+    <th>Motivo</th>
+    <th>Estado</th>
+  </tr>
+  {% for item in citas %}
+  <tr>
+    <td>{{item.id}}</td>
+    <td>{{item.fecha_hora.strftime('%d/%m/%Y %H:%M')}}</td>
+    <td>{{item.medico.nombre}}</td>
+    <td>{{item.paciente.nombre}}</td>
+    <td>{{item.motivo}}</td>
+    <td>{{item.estado}}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<a href="{{ url_for('cita.index') }}" class="btn btn-secondary">Volver</a>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}PANEL ADMINISTRATIVO{% endblock %}
+
+{% block content %}
+
+<h1>Panel Administrativo</h1>
+
+<div class="row mt-4">
+  <div class="col-md-4 mb-3">
+    <div class="card text-white bg-primary">
+      <div class="card-body">
+        <h5 class="card-title">Medicos</h5>
+        <p class="card-text display-4">{{ total_medicos }}</p>
+        <a href="/medicos/" class="btn btn-light">Ver Medicos</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card text-white bg-success">
+      <div class="card-body">
+        <h5 class="card-title">Pacientes</h5>
+        <p class="card-text display-4">{{ total_pacientes }}</p>
+        <a href="/pacientes/" class="btn btn-light">Ver Pacientes</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card text-white bg-info">
+      <div class="card-body">
+        <h5 class="card-title">Consultas</h5>
+        <p class="card-text display-4">{{ total_consultas }}</p>
+        <a href="/consultas/" class="btn btn-light">Ver Consultas</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card text-white bg-warning">
+      <div class="card-body">
+        <h5 class="card-title">Citas</h5>
+        <p class="card-text display-4">{{ total_citas }}</p>
+        <a href="/citas/" class="btn btn-light">Ver Citas</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card text-white bg-danger">
+      <div class="card-body">
+        <h5 class="card-title">Usuarios</h5>
+        <p class="card-text display-4">{{ total_usuarios }}</p>
+        <a href="/usuarios/" class="btn btn-light">Ver Usuarios</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
